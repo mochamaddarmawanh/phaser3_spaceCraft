@@ -2,6 +2,10 @@ export default class GameplayUI {
 
     constructor(scene) {
         this.scene = scene;
+
+        this.bossBar = null;
+        this.bossBarBg = null;
+        this.bossMaxHealth = 1000;
     }
 
     create(shipController, shootController) {
@@ -34,4 +38,55 @@ export default class GameplayUI {
         this.scoreText.setText("Alien Killed: " + this.scene.score);
     }
 
+    showBossHealth(maxHealth) {
+
+        this.bossMaxHealth = maxHealth;
+
+        const width = this.scene.scale.width;
+
+        this.barWidth = 300;
+        this.barHeight = 18;
+
+        this.x = width - this.barWidth - 30;
+        this.y = 40;
+
+        this.bossBarBg = this.scene.add.graphics();
+        this.bossBarBg.fillStyle(0x000000, 0.6);
+        this.bossBarBg.fillRect(this.x - 3, this.y - 3, this.barWidth + 6, this.barHeight + 6);
+
+        this.bossBar = this.scene.add.graphics();
+        this.bossBar.fillStyle(0xff0000, 1);
+        this.bossBar.fillRect(this.x, this.y, this.barWidth, this.barHeight);
+
+        this.bossTitle = this.scene.add.text(
+            this.x + this.barWidth / 2,
+            this.y - 18,
+            "UFO BOSS",
+            {
+                fontSize: "18px",
+                color: "#ffffff"
+            }
+        ).setOrigin(0.5);
+
+    }
+
+    updateBossHealth(currentHealth) {
+
+        if (!this.bossBar) return;
+
+        const percent = currentHealth / this.bossMaxHealth;
+
+        this.bossBar.clear();
+        this.bossBar.fillStyle(0xff0000, 1);
+        this.bossBar.fillRect(this.x, this.y, this.barWidth * percent, this.barHeight);
+
+    }
+
+    hideBossHealth() {
+
+        if (this.bossBar) this.bossBar.destroy();
+        if (this.bossBarBg) this.bossBarBg.destroy();
+        if (this.bossTitle) this.bossTitle.destroy();
+
+    }
 }

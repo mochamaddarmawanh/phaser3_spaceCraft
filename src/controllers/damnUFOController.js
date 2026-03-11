@@ -50,6 +50,8 @@ export default class DamnUFOController {
 
     spawnUFO() {
 
+        this.scene.gameplayUI.showBossHealth(this.health);
+
         this.scene.cameras.main.shake(500, 0.01);
 
         // stop alien spawning
@@ -69,11 +71,11 @@ export default class DamnUFOController {
         ufo.setScale(6);
 
         ufo.direction = Phaser.Math.Between(0, 1) ? 1 : -1;
-        ufo.speedY = 250;
+        ufo.speedY = 200;
 
         // shoot super fast
         this.scene.time.addEvent({
-            delay: 400,
+            delay: 750,
             callback: () => {
 
                 if (!ufo.active) return;
@@ -104,8 +106,14 @@ export default class DamnUFOController {
 
         this.health--;
 
+        this.scene.gameplayUI.updateBossHealth(this.health);
+
         if (this.health <= 0) {
+
             ufo.destroy();
+
+            this.scene.gameplayUI.hideBossHealth();
+
         }
 
     }
