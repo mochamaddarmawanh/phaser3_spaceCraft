@@ -231,10 +231,10 @@ export class Start extends Phaser.Scene {
         this.shipController.decreaseHealthShip();
     }
 
-    gameOver() {
+    gameOver(title = "MISSION FAILED") {
         this.physics.pause();
         this.input.keyboard.enabled = false;
 
-        this.gameOverUI.show(this.score);
+        this.gameOverUI.show(this.score, title);
     }
 }

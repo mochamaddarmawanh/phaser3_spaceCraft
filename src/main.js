@@ -1,4 +1,5 @@
 import { Start } from './scenes/Start.js';
+import { MainMenu } from "./scenes/MainMenu.js";
 
 const config = {
     type: Phaser.AUTO,
@@ -15,6 +16,7 @@ const config = {
     pixelArt: false,
 
     scene: [
+        MainMenu,
         Start
     ],
 

@@ -14,6 +14,11 @@ export default class DamnUFOController {
         this.shipUFO = this.scene.physics.add.group();
         this.bullets = this.scene.physics.add.group();
 
+        // start the countdown 30 seconds before UFO spawn
+        this.scene.time.delayedCall(90000, () => {
+            this.scene.gameplayUI.startUFOCountdown(30);
+        });
+
         // spawn UFO after 2 minutes
         this.scene.time.delayedCall(120000, () => {
             this.spawnUFO();
@@ -104,6 +109,8 @@ export default class DamnUFOController {
 
     decreaseHealthShipUFO(ufo) {
 
+        if (this.health <= 0) return;
+
         this.health--;
 
         this.scene.gameplayUI.updateBossHealth(this.health);
@@ -113,6 +120,7 @@ export default class DamnUFOController {
             ufo.destroy();
 
             this.scene.gameplayUI.hideBossHealth();
+            this.scene.gameOver('MISSION SUCCESS');
 
         }
 

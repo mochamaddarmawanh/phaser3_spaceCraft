@@ -4,7 +4,7 @@ export default class GameOverUI {
         this.scene = scene;
     }
 
-    show(score) {
+    show(score, titleText = "MISSION FAILED") {
 
         const width = this.scene.scale.width;
         const height = this.scene.scale.height;
@@ -32,10 +32,10 @@ export default class GameOverUI {
         const title = this.scene.add.text(
             width/2,
             height/2 - 120,
-            "MISSION FAILED",
+            titleText,
             {
                 fontSize: "48px",
-                color: "#ff4444",
+                color: titleText === "MISSION SUCCESS" ? "#44ff44" : "#ff4444",
                 fontStyle: "bold"
             }
         ).setOrigin(0.5).setAlpha(0);
@@ -43,7 +43,7 @@ export default class GameOverUI {
         const scoreText = this.scene.add.text(
             width/2,
             height/2 - 40,
-            "Score: " + score,
+            "Alien Killed: " + score,
             {
                 fontSize: "32px",
                 color: "#ffffff"

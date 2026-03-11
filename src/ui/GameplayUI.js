@@ -6,6 +6,9 @@ export default class GameplayUI {
         this.bossBar = null;
         this.bossBarBg = null;
         this.bossMaxHealth = 1000;
+
+        this.ufoCountdownText = null;
+        this.ufoTimeLeft = 0;
     }
 
     create(shipController, shootController) {
@@ -87,6 +90,59 @@ export default class GameplayUI {
         if (this.bossBar) this.bossBar.destroy();
         if (this.bossBarBg) this.bossBarBg.destroy();
         if (this.bossTitle) this.bossTitle.destroy();
+
+    }
+
+    startUFOCountdown(seconds) {
+
+        this.ufoTimeLeft = seconds;
+
+        const width = this.scene.scale.width;
+
+        this.ufoCountdownText = this.scene.add.text(
+            width / 2,
+            80,
+            "",
+            {
+                fontSize: "26px",
+                color: "#ff4444",
+                fontStyle: "bold"
+            }
+        ).setOrigin(0.5);
+
+        this.updateCountdownText();
+
+        this.scene.time.addEvent({
+            delay: 1000,
+            repeat: seconds - 1,
+            callback: () => {
+
+                this.ufoTimeLeft--;
+
+                this.updateCountdownText();
+
+                if (this.ufoTimeLeft <= 0) {
+                    this.hideUFOCountdown();
+                }
+
+            }
+        });
+    }
+
+    updateCountdownText() {
+
+        this.ufoCountdownText.setText(
+            "UFO will appear in " + this.ufoTimeLeft + " seconds"
+        );
+
+    }
+
+    hideUFOCountdown() {
+
+        if (this.ufoCountdownText) {
+            this.ufoCountdownText.destroy();
+            this.ufoCountdownText = null;
+        }
 
     }
 }

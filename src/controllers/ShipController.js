@@ -55,10 +55,12 @@ export default class ShipController {
     }
 
     decreaseHealthShip() {
+        if (this.scene.damnUFOController.health <= 0) return;
+        
         this.health--;
 
         if (this.health <= 0) {
-            this.scene.gameOver();
+            this.scene.gameOver('MISSION FAILED');
         }
     }
 

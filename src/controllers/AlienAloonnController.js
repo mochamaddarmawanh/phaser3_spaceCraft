@@ -65,7 +65,7 @@ export default class AlienAloonnController {
 
         // random up-down movement
         alien.direction = Phaser.Math.Between(0, 1) ? 1 : -1;
-        alien.speedY = Phaser.Math.Between(50, 150);
+        alien.speedY = Phaser.Math.Between(70, 250);
 
         // alien shoot every 3 seconds
         this.scene.time.addEvent({
