@@ -7,8 +7,8 @@ const config = {
     description: '',
     parent: 'game-container',
 
-    width: window.innerWidth,
-    height: window.innerHeight,
+    width: 1280,
+    height: 720,
     // width: 140,
     // height: 140,
 
