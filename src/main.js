@@ -7,10 +7,9 @@ const config = {
     description: '',
     parent: 'game-container',
 
-    width: 1280,
-    height: 720,
-    // width: 140,
-    // height: 140,
+    
+    width: 140,
+height: 140,
 
     backgroundColor: '#000000',
     pixelArt: false,
